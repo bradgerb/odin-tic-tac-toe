@@ -1,11 +1,4 @@
-const cells = (function () {
-
-    let value = 0
-
-    return {value};
-})();
-
-const gameboard = (function () {
+const createBoard = (function () {
     const rows = 3;
     const columns = 3;
     const board = [];
@@ -13,15 +6,33 @@ const gameboard = (function () {
     for (let i = 0; i < rows; i++){
         board[i] = [];
         for (let j = 0; j < columns; j++){
-            board[i].push(cells.value);
+            board[i].push(0);
         }
     }
 
-
-    const example = (a, b) => a + b;
-    const anotherOne = (a) => 2 * a;
-    return {example, anotherOne, board};
+    return {rows, columns, board};
 })();
 
-console.log(gameboard.example(5, 6));
-console.log(gameboard.board);
+const updateBoard = (function () {
+
+    function changeCell(row, column, player){
+        createBoard.board[row][column] = player
+    }
+
+    function resetBoard(){
+        for (let i = 0; i < createBoard.rows; i++){
+            createBoard.board[i] = [];
+            for (let j = 0; j < createBoard.columns; j++){
+                createBoard.board[i][j] = 0;
+            }
+        }
+    }
+
+    return {changeCell, resetBoard};
+})();
+
+console.log(createBoard.board);
+updateBoard.changeCell(1, 2, 1);
+console.log(createBoard.board);
+updateBoard.resetBoard();
+console.log(createBoard.board);
