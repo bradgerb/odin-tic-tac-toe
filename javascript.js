@@ -4,9 +4,15 @@ const gameBoard = (function () {
     let board = [];
 
     let test = 0;
+    let testArray = [1, 2, 3, 4, 5];
+    let testNestedArray = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
     function testInc() {
         test++;
+    }
+
+    function testSet(a) {
+        test = a;
     }
     
     function currentTest() {
@@ -15,6 +21,22 @@ const gameBoard = (function () {
 
     function resetTest() {
         test = 0;
+    }
+
+    function setTestArray(a) {
+        testArray[3] = a;
+    }
+
+    function currentTestArray() {
+        return testArray;
+    }
+
+    function currentTestNestedArray() {
+        return testNestedArray;
+    }
+
+    function setTestNestedArray() {
+        testNestedArray[1][1] = 20;
     }
 
     for (let i = 0; i < rows; i++){
@@ -37,18 +59,18 @@ const gameBoard = (function () {
         }
     }
 
-    function display(){
+    function currentBoard(){
         return board;
     }
 
-    return {update, reset, display, testInc, currentTest, resetTest};
+    return {update, reset, currentBoard, testInc, currentTest, resetTest, testSet, setTestArray, currentTestArray, currentTestNestedArray, setTestNestedArray};
 })();
 
-console.log(gameBoard.display());
+console.log(gameBoard.currentBoard());
 gameBoard.update(1, 2, 1);
-console.log(gameBoard.display());
+console.log(gameBoard.currentBoard());
 gameBoard.reset();
-console.log(gameBoard.display());
+console.log(gameBoard.currentBoard());
 
 console.log(gameBoard.currentTest());
 gameBoard.testInc();
@@ -61,3 +83,13 @@ gameBoard.resetTest();
 console.log(gameBoard.currentTest());
 gameBoard.testInc();
 console.log(gameBoard.currentTest());
+gameBoard.testSet(5);
+console.log(gameBoard.currentTest());
+
+console.log(gameBoard.currentTestArray());
+gameBoard.setTestArray(9);
+console.log(gameBoard.currentTestArray());
+
+console.log(gameBoard.currentTestNestedArray());
+gameBoard.setTestNestedArray();
+console.log(gameBoard.currentTestNestedArray());
