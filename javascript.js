@@ -1,8 +1,22 @@
-const createBoard = (function () {
+const gameBoard = (function () {
     const rows = 3;
     const columns = 3;
-    const board = [];
+    let board = [];
+
+    let test = 0;
+
+    function testInc() {
+        test++;
+    }
     
+    function currentTest() {
+        return test;
+    }
+
+    function resetTest() {
+        test = 0;
+    }
+
     for (let i = 0; i < rows; i++){
         board[i] = [];
         for (let j = 0; j < columns; j++){
@@ -10,29 +24,40 @@ const createBoard = (function () {
         }
     }
 
-    return {rows, columns, board};
-})();
-
-const updateBoard = (function () {
-
-    function changeCell(row, column, player){
-        createBoard.board[row][column] = player
+    function update(row, column, player){
+        board[row][column] = player
     }
 
-    function resetBoard(){
-        for (let i = 0; i < createBoard.rows; i++){
-            createBoard.board[i] = [];
-            for (let j = 0; j < createBoard.columns; j++){
-                createBoard.board[i][j] = 0;
+    function reset(){
+        for (let i = 0; i < rows; i++){
+            board[i] = [];
+            for (let j = 0; j < columns; j++){
+                board[i][j] = 0;
             }
         }
     }
 
-    return {changeCell, resetBoard};
+    function display(){
+        return board;
+    }
+
+    return {update, reset, display, testInc, currentTest, resetTest};
 })();
 
-console.log(createBoard.board);
-updateBoard.changeCell(1, 2, 1);
-console.log(createBoard.board);
-updateBoard.resetBoard();
-console.log(createBoard.board);
+console.log(gameBoard.display());
+gameBoard.update(1, 2, 1);
+console.log(gameBoard.display());
+gameBoard.reset();
+console.log(gameBoard.display());
+
+console.log(gameBoard.currentTest());
+gameBoard.testInc();
+console.log(gameBoard.currentTest());
+gameBoard.testInc();
+console.log(gameBoard.currentTest());
+gameBoard.testInc();
+console.log(gameBoard.currentTest());
+gameBoard.resetTest();
+console.log(gameBoard.currentTest());
+gameBoard.testInc();
+console.log(gameBoard.currentTest());
