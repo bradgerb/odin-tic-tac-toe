@@ -66,12 +66,14 @@ const gameBoard = (function () {
     return {update, reset, currentBoard, testInc, currentTest, resetTest, testSet, setTestArray, currentTestArray, currentTestNestedArray, setTestNestedArray};
 })();
 
+console.log("Actual Project");
 console.log(gameBoard.currentBoard());
 gameBoard.update(1, 2, 1);
 console.log(gameBoard.currentBoard());
 gameBoard.reset();
 console.log(gameBoard.currentBoard());
 
+console.log("Single variable test");
 console.log(gameBoard.currentTest());
 gameBoard.testInc();
 console.log(gameBoard.currentTest());
@@ -86,10 +88,12 @@ console.log(gameBoard.currentTest());
 gameBoard.testSet(5);
 console.log(gameBoard.currentTest());
 
+console.log("Single array test");
 console.log(gameBoard.currentTestArray());
 gameBoard.setTestArray(9);
 console.log(gameBoard.currentTestArray());
 
+console.log("Nested array test");
 console.log(gameBoard.currentTestNestedArray());
 gameBoard.setTestNestedArray();
 console.log(gameBoard.currentTestNestedArray());
