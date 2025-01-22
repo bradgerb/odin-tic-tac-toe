@@ -56,10 +56,18 @@ const gameController = (function () {
     };
 
     const playTurn = (a, b)=>{
+        if(checkOccupied(a, b) === 1){
         gameBoard.update(a, b, currentPlayer.marker);
         console.log(JSON.stringify(gameBoard.currentBoard()));
         checkWin();
         switchPlayer();
+        };
+    };
+
+    const checkOccupied = (a, b)=> {
+        if(gameBoard.board[a][b] === 0){
+            return 1
+        };
     };
 
     const checkWin = ()=>{
@@ -91,6 +99,7 @@ const gameController = (function () {
 })();
 
 console.log(JSON.stringify(gameBoard.currentBoard()));
+gameController.playTurn(0, 0);
 gameController.playTurn(0, 0);
 gameController.playTurn(1, 1);
 gameController.playTurn(0, 1);
