@@ -30,8 +30,17 @@ const gameBoard = (function () {
     return {update, reset, currentBoard};
 })();
 
+const createPlayer = (name, marker)=>{
+    this.name = name;
+    this.marker = marker;
+
+    return {name, marker};
+};
+
 console.log(JSON.stringify(gameBoard.currentBoard()));
 gameBoard.update(1, 2, 1);
 console.log(JSON.stringify(gameBoard.currentBoard()));
 gameBoard.reset();
 console.log(JSON.stringify(gameBoard.currentBoard()));
+
+console.log(createPlayer("Bob","X"));
