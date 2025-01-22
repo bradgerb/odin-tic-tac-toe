@@ -61,6 +61,7 @@ const gameController = (function () {
         gameBoard.update(a, b, currentPlayer.marker);
         console.log(JSON.stringify(gameBoard.currentBoard()));
         checkWin();
+        checkDraw();
         switchPlayer();
         };
     };
@@ -75,11 +76,14 @@ const gameController = (function () {
 
     const checkWin = ()=>{
 
+        let winMessage = `${currentPlayer.name} is the winner!`;
+
         //check horizontal
         for (let i = 0; i < 3; i++){
             if (gameBoard.board[i][0] === gameBoard.board[i][1] && gameBoard.board[i][0] === gameBoard.board[i][2] && gameBoard.board[i][0] != 0){
-                console.log("Winner");
+                console.log(winMessage);
                 gameController.winFlag = 1;
+                currentPlayer = players[1];
                 return
             };
         };
@@ -87,24 +91,42 @@ const gameController = (function () {
         // check vertical
         for (let j = 0; j < 3; j++){
             if (gameBoard.board[0][j] === gameBoard.board[1][j] && gameBoard.board[0][j] === gameBoard.board[2][j] && gameBoard.board[0][j] != 0){
-                console.log("Winner");
+                console.log(winMessage);
                 gameController.winFlag = 1;
+                currentPlayer = players[1];
                 return
             };
         };
 
         // check diagonal
         if (gameBoard.board[0][0] === gameBoard.board[1][1] && gameBoard.board[0][0] === gameBoard.board[2][2] && gameBoard.board[0][0] != 0){
-            console.log("Winner");
+            console.log(winMessage);
             gameController.winFlag = 1;
+            currentPlayer = players[1];
             return
         };
         if (gameBoard.board[0][2] === gameBoard.board[1][1] && gameBoard.board[0][2] === gameBoard.board[2][0] && gameBoard.board[0][2] != 0){
-            console.log("Winner");
+            console.log(winMessage);
             gameController.winFlag = 1;
+            currentPlayer = players[1];
             return
         };
     };
+
+    const checkDraw = ()=>{
+
+        let drawMessage = "The game is a draw";
+
+        for (let i = 0; i < 3; i++){
+            for (let j = 0; j < 3; j++){
+                if (gameBoard.board[i][j] === 0){
+                    return
+                };                
+            };
+        };
+        currentPlayer = players[1];
+        return console.log(drawMessage);
+    }
 
     return {playTurn, winFlag};
 
@@ -122,4 +144,17 @@ gameBoard.reset();
 gameController.playTurn(0, 1);
 gameController.playTurn(0, 0);
 gameController.playTurn(1, 1);
+gameController.playTurn(1, 0);
+gameController.playTurn(1, 2);
+gameController.playTurn(2, 0);
+gameController.playTurn(2, 2);
+gameBoard.reset();
+gameController.playTurn(0, 1);
+gameController.playTurn(0, 0);
+gameController.playTurn(1, 1);
+gameController.playTurn(1, 0);
+gameController.playTurn(1, 2);
 gameController.playTurn(2, 1);
+gameController.playTurn(2, 2);
+gameController.playTurn(0, 2);
+gameController.playTurn(2, 0);
