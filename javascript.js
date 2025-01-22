@@ -30,9 +30,9 @@ const gameBoard = (function () {
     return {update, reset, currentBoard};
 })();
 
-const player = (function () {
+const gameController = (function () {
     
-    const players = [
+        const players = [
         {
             name: "Bob",
             marker: "X"
@@ -43,9 +43,21 @@ const player = (function () {
         }
     ];
 
-    const displayPlayer = (number)=> console.log(players[number].name);
+    let turn = 1;
+    let currentPlayer = players[0];
 
-    return {displayPlayer};
+    const displayPlayerName = (number)=> console.log(players[number].name);
+    const displayPlayerMarker = (number)=> console.log(players[number].marker);
+    const displayCurrentPlayerName = ()=> console.log(currentPlayer.name);
+
+    const switchPlayer = ()=> {if(currentPlayer === players[0]){
+        currentPlayer = players[1];
+        } else{
+            currentPlayer = players[0];
+        };
+    };
+
+    return {displayPlayerName, displayPlayerMarker, switchPlayer, displayCurrentPlayerName};
 
 })();
 
@@ -55,4 +67,6 @@ console.log(JSON.stringify(gameBoard.currentBoard()));
 gameBoard.reset();
 console.log(JSON.stringify(gameBoard.currentBoard()));
 
-player.displayPlayer(1);
+gameController.displayCurrentPlayerName();
+gameController.switchPlayer();
+gameController.displayCurrentPlayerName();
