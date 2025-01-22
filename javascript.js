@@ -32,7 +32,7 @@ const gameBoard = (function () {
 
 const gameController = (function () {
     
-        const players = [
+    const players = [
         {
             name: "Bob",
             marker: "X"
@@ -43,12 +43,10 @@ const gameController = (function () {
         }
     ];
 
-    let turn = 1;
     let currentPlayer = players[0];
 
-    const displayPlayerName = (number)=> console.log(players[number].name);
-    const displayPlayerMarker = (number)=> console.log(players[number].marker);
     const displayCurrentPlayerName = ()=> console.log(currentPlayer.name);
+    const displayCurrentPlayerMarker = ()=> console.log(currentPlayer.marker);
 
     const switchPlayer = ()=> {if(currentPlayer === players[0]){
         currentPlayer = players[1];
@@ -57,16 +55,45 @@ const gameController = (function () {
         };
     };
 
-    return {displayPlayerName, displayPlayerMarker, switchPlayer, displayCurrentPlayerName};
+    const playTurn = (a, b)=>{
+        gameBoard.update(a, b, currentPlayer.marker);
+        console.log(JSON.stringify(gameBoard.currentBoard()));
+        // console.log(checkWin());
+        switchPlayer();
+    };
+
+    const checkWin = ()=>{
+        //check horizontal
+        for (let i = 0; i < 3; i++){
+            if (gameBoard.currentBoard[i][0] === gameBoard.currentBoard[i][1] && gameBoard.currentBoard[i][0] === gameBoard.currentBoard[i][2] && gameBoard.currentBoard[i][0] != 0){
+                return "Winner"
+            };
+        }
+
+        //check vertical
+        for (let i = 0; i < 3; i++){
+            if (gameBoard.currentBoard[0][i] === gameBoard.currentBoard[1][i] && gameBoard.currentBoard[0][i] === gameBoard.currentBoard[2][i] && gameBoard.currentBoard[0][i] != 0){
+                return "Winner"
+            };
+        }
+
+        //check diagonal
+        if (gameBoard.currentBoard[0][0] === gameBoard.currentBoard[1][1] && gameBoard.currentBoard[0][0] === gameBoard.currentBoard[2][2] && gameBoard.currentBoard[0][0] != 0){
+            return "Winner"
+        };
+        if (gameBoard.currentBoard[0][2] === gameBoard.currentBoard[1][1] && gameBoard.currentBoard[0][2] === gameBoard.currentBoard[2][0] && gameBoard.currentBoard[0][2] != 0){
+            return "Winner"
+        };
+    };
+
+    return {displayCurrentPlayerName, displayCurrentPlayerMarker, switchPlayer, playTurn};
+
+})();
+
+const displayController = (function(){
 
 })();
 
 console.log(JSON.stringify(gameBoard.currentBoard()));
-gameBoard.update(1, 2, 1);
-console.log(JSON.stringify(gameBoard.currentBoard()));
-gameBoard.reset();
-console.log(JSON.stringify(gameBoard.currentBoard()));
-
-gameController.displayCurrentPlayerName();
-gameController.switchPlayer();
-gameController.displayCurrentPlayerName();
+gameController.playTurn(0, 0);
+gameController.playTurn(1, 1);
