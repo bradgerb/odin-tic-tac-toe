@@ -30,12 +30,24 @@ const gameBoard = (function () {
     return {update, reset, currentBoard};
 })();
 
-const createPlayer = (name, marker)=>{
-    this.name = name;
-    this.marker = marker;
+const player = (function () {
+    
+    const players = [
+        {
+            name: "Bob",
+            marker: "X"
+        },
+        {
+            name: "Not Bob",
+            marker: "O"
+        }
+    ];
 
-    return {name, marker};
-};
+    const displayPlayer = (number)=> console.log(players[number].name);
+
+    return {displayPlayer};
+
+})();
 
 console.log(JSON.stringify(gameBoard.currentBoard()));
 gameBoard.update(1, 2, 1);
@@ -43,4 +55,4 @@ console.log(JSON.stringify(gameBoard.currentBoard()));
 gameBoard.reset();
 console.log(JSON.stringify(gameBoard.currentBoard()));
 
-console.log(createPlayer("Bob","X"));
+player.displayPlayer(1);
