@@ -7,25 +7,26 @@ const gameBoard = (function () {
         board[i] = [];
         for (let j = 0; j < columns; j++){
             board[i].push(0);
-        }
-    }
+        };
+    };
 
     function update(row, column, player){
         board[row][column] = player
-    }
+    };
 
     function reset(){
         for (let i = 0; i < rows; i++){
             board[i] = [];
             for (let j = 0; j < columns; j++){
                 board[i][j] = 0;
-            }
-        }
-    }
+            };
+        };
+        gameController.winFlag = 0;
+    };
 
     function currentBoard(){
         return board;
-    }
+    };
 
     return {update, reset, currentBoard, board};
 })();
@@ -56,7 +57,7 @@ const gameController = (function () {
     };
 
     const playTurn = (a, b)=>{
-        if(checkOccupied(a, b) === 1){
+        if(checkOccupied(a, b) === 1 && gameController.winFlag === 0){
         gameBoard.update(a, b, currentPlayer.marker);
         console.log(JSON.stringify(gameBoard.currentBoard()));
         checkWin();
@@ -69,32 +70,43 @@ const gameController = (function () {
             return 1
         };
     };
+    
+    let winFlag = 0;
 
     const checkWin = ()=>{
+
         //check horizontal
         for (let i = 0; i < 3; i++){
             if (gameBoard.board[i][0] === gameBoard.board[i][1] && gameBoard.board[i][0] === gameBoard.board[i][2] && gameBoard.board[i][0] != 0){
-                return console.log("Winner")
+                console.log("Winner");
+                gameController.winFlag = 1;
+                return
             };
         };
 
         // check vertical
         for (let j = 0; j < 3; j++){
             if (gameBoard.board[0][j] === gameBoard.board[1][j] && gameBoard.board[0][j] === gameBoard.board[2][j] && gameBoard.board[0][j] != 0){
-                return console.log("Winner")
+                console.log("Winner");
+                gameController.winFlag = 1;
+                return
             };
         };
 
         // check diagonal
         if (gameBoard.board[0][0] === gameBoard.board[1][1] && gameBoard.board[0][0] === gameBoard.board[2][2] && gameBoard.board[0][0] != 0){
-            return console.log("Winner")
+            console.log("Winner");
+            gameController.winFlag = 1;
+            return
         };
         if (gameBoard.board[0][2] === gameBoard.board[1][1] && gameBoard.board[0][2] === gameBoard.board[2][0] && gameBoard.board[0][2] != 0){
-            return console.log("Winner")
+            console.log("Winner");
+            gameController.winFlag = 1;
+            return
         };
     };
 
-    return {playTurn};
+    return {playTurn, winFlag};
 
 })();
 
@@ -105,3 +117,9 @@ gameController.playTurn(1, 1);
 gameController.playTurn(0, 1);
 gameController.playTurn(2, 2);
 gameController.playTurn(0, 2);
+gameController.playTurn(1, 2);
+gameBoard.reset();
+gameController.playTurn(0, 1);
+gameController.playTurn(0, 0);
+gameController.playTurn(1, 1);
+gameController.playTurn(2, 1);
