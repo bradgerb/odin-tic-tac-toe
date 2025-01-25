@@ -78,38 +78,18 @@ const gameController = (function () {
 
         let winMessage = `${currentPlayer.name} is the winner!`;
 
-        //check horizontal
         for (let i = 0; i < 3; i++){
-            if (gameBoard.board[i][0] === gameBoard.board[i][1] && gameBoard.board[i][0] === gameBoard.board[i][2] && gameBoard.board[i][0] != 0){
+            if (//check horizontal
+                gameBoard.board[i][0] === gameBoard.board[i][1] && gameBoard.board[i][0] === gameBoard.board[i][2] && gameBoard.board[i][0] != 0 ||
+                //check vertical
+                gameBoard.board[0][i] === gameBoard.board[1][i] && gameBoard.board[0][i] === gameBoard.board[2][i] && gameBoard.board[0][i] != 0 ||
+                // check diagonal
+                gameBoard.board[0][0] === gameBoard.board[1][1] && gameBoard.board[0][0] === gameBoard.board[2][2] && gameBoard.board[0][0] != 0 ||
+                gameBoard.board[0][2] === gameBoard.board[1][1] && gameBoard.board[0][2] === gameBoard.board[2][0] && gameBoard.board[0][2] != 0){
                 console.log(winMessage);
                 gameController.winFlag = 1;
                 currentPlayer = players[1];
-                return
             };
-        };
-
-        // check vertical
-        for (let j = 0; j < 3; j++){
-            if (gameBoard.board[0][j] === gameBoard.board[1][j] && gameBoard.board[0][j] === gameBoard.board[2][j] && gameBoard.board[0][j] != 0){
-                console.log(winMessage);
-                gameController.winFlag = 1;
-                currentPlayer = players[1];
-                return
-            };
-        };
-
-        // check diagonal
-        if (gameBoard.board[0][0] === gameBoard.board[1][1] && gameBoard.board[0][0] === gameBoard.board[2][2] && gameBoard.board[0][0] != 0){
-            console.log(winMessage);
-            gameController.winFlag = 1;
-            currentPlayer = players[1];
-            return
-        };
-        if (gameBoard.board[0][2] === gameBoard.board[1][1] && gameBoard.board[0][2] === gameBoard.board[2][0] && gameBoard.board[0][2] != 0){
-            console.log(winMessage);
-            gameController.winFlag = 1;
-            currentPlayer = players[1];
-            return
         };
     };
 
