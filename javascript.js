@@ -46,9 +46,6 @@ const gameController = (function () {
 
     let currentPlayer = players[0];
 
-    const displayCurrentPlayerName = ()=> console.log(currentPlayer.name);
-    const displayCurrentPlayerMarker = ()=> console.log(currentPlayer.marker);
-
     const switchPlayer = ()=> {if(currentPlayer === players[0]){
         currentPlayer = players[1];
         } else{
@@ -89,6 +86,7 @@ const gameController = (function () {
                 console.log(winMessage);
                 gameController.winFlag = 1;
                 currentPlayer = players[1];
+                return
             };
         };
     };
