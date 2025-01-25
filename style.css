@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+}
+
+.container{
+    height: 100vh;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameboard{
+    height: 500px;
+    width: 500px;
+    border: solid black 5px;
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.cell{
+    background-color: white;    
+}
