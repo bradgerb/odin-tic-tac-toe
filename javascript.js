@@ -110,29 +110,28 @@ const gameController = (function () {
 
 })();
 
+const displayController = (function () {
+    const cellOne = document.querySelector(".one");
+    const cellTwo = document.querySelector(".two");
+    const cellThree = document.querySelector(".three");
+    const cellFour = document.querySelector(".four");
+    const cellFive = document.querySelector(".five");
+    const cellSix = document.querySelector(".six");
+    const cellSeven = document.querySelector(".seven");
+    const cellEight = document.querySelector(".eight");
+    const cellNine = document.querySelector(".nine");
+
+    cellOne.addEventListener("click", gameController.playTurn(0, 0));
+    cellTwo.addEventListener("click", gameController.playTurn(0, 1));
+    cellThree.addEventListener("click", gameController.playTurn(0, 2));
+    cellFour.addEventListener("click", gameController.playTurn(1, 0));
+    cellFive.addEventListener("click", gameController.playTurn(1, 1));
+    cellSix.addEventListener("click", gameController.playTurn(1, 2));
+    cellSeven.addEventListener("click", gameController.playTurn(2, 0));
+    cellEight.addEventListener("click", gameController.playTurn(2, 1));
+    cellNine.addEventListener("click", gameController.playTurn(2, 2));
+})();
+
 console.log(JSON.stringify(gameBoard.currentBoard()));
 gameController.playTurn(0, 0);
-gameController.playTurn(0, 0);
-gameController.playTurn(1, 1);
 gameController.playTurn(0, 1);
-gameController.playTurn(2, 2);
-gameController.playTurn(0, 2);
-gameController.playTurn(1, 2);
-gameBoard.reset();
-gameController.playTurn(0, 1);
-gameController.playTurn(0, 0);
-gameController.playTurn(1, 1);
-gameController.playTurn(1, 0);
-gameController.playTurn(1, 2);
-gameController.playTurn(2, 0);
-gameController.playTurn(2, 2);
-gameBoard.reset();
-gameController.playTurn(0, 1);
-gameController.playTurn(0, 0);
-gameController.playTurn(1, 1);
-gameController.playTurn(1, 0);
-gameController.playTurn(1, 2);
-gameController.playTurn(2, 1);
-gameController.playTurn(2, 2);
-gameController.playTurn(0, 2);
-gameController.playTurn(2, 0);
