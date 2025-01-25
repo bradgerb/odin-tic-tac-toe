@@ -106,7 +106,7 @@ const gameController = (function () {
         return console.log(drawMessage);
     }
 
-    return {playTurn, winFlag};
+    return {playTurn, winFlag, currentPlayer};
 
 })();
 
@@ -130,4 +130,14 @@ const displayController = (function () {
     cellSeven.addEventListener("click", ()=> gameController.playTurn(2, 0));
     cellEight.addEventListener("click", ()=> gameController.playTurn(2, 1));
     cellNine.addEventListener("click", ()=> gameController.playTurn(2, 2));
+
+    cellOne.addEventListener("click", ()=> cellOne.textContent = gameController.currentPlayer.marker);
+    cellTwo.addEventListener("click", ()=> cellTwo.textContent = gameController.currentPlayer.marker);
+    cellThree.addEventListener("click", ()=> cellThree.textContent = gameController.currentPlayer.marker);
+    cellFour.addEventListener("click", ()=> cellFour.textContent = gameController.currentPlayer.marker);
+    cellFive.addEventListener("click", ()=> cellFive.textContent = gameController.currentPlayer.marker);
+    cellSix.addEventListener("click", ()=> cellSix.textContent = gameController.currentPlayer.marker);
+    cellSeven.addEventListener("click", ()=> cellSeven.textContent = gameController.currentPlayer.marker);
+    cellEight.addEventListener("click", ()=> cellEight.textContent = gameController.currentPlayer.marker);
+    cellNine.addEventListener("click", ()=> cellNine.textContent = gameController.currentPlayer.marker);
 })();
