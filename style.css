@@ -11,8 +11,8 @@ body{
 }
 
 .gameboard{
-    height: 500px;
-    width: 500px;
+    height: 600px;
+    width: 600px;
     border: solid black 5px;
     background-color: black;
     display: grid;
@@ -22,5 +22,9 @@ body{
 }
 
 .cell{
-    background-color: white;    
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 170px;
 }
