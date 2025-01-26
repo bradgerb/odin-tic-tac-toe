@@ -21,6 +21,7 @@ const gameBoard = (function () {
                 board[i][j] = 0;
             };
         };
+        gameController.setCurrentPlayer(0);
         gameController.winFlag = 0;
     };
 
@@ -46,6 +47,12 @@ const gameController = (function () {
 
     let currentPlayer = players[0];
 
+    const setCurrentPlayer = (n)=> {
+        let currentPlayerNumber = n;
+        currentPlayer = players[currentPlayerNumber];
+        return currentPlayer
+    };
+
     const switchPlayer = ()=> {if(currentPlayer === players[0]){
         currentPlayer = players[1];
         } else{
@@ -57,6 +64,7 @@ const gameController = (function () {
         if(checkOccupied(a, b) === 1 && gameController.winFlag === 0){
         gameBoard.update(a, b, currentPlayer.marker);
         console.log(JSON.stringify(gameBoard.currentBoard()));
+        // displayController.cellOne.textContent = currentPlayer.marker;
         checkWin();
         checkDraw();
         switchPlayer();
@@ -85,7 +93,8 @@ const gameController = (function () {
                 gameBoard.board[0][2] === gameBoard.board[1][1] && gameBoard.board[0][2] === gameBoard.board[2][0] && gameBoard.board[0][2] != 0){
                 console.log(winMessage);
                 gameController.winFlag = 1;
-                currentPlayer = players[1];
+                //switchPlayer runs after winCheck - reset active player for next game
+                // currentPlayer = players[1];
                 return
             };
         };
@@ -95,6 +104,7 @@ const gameController = (function () {
 
         let drawMessage = "The game is a draw";
 
+        //check if board is full
         for (let i = 0; i < 3; i++){
             for (let j = 0; j < 3; j++){
                 if (gameBoard.board[i][j] === 0){
@@ -102,11 +112,14 @@ const gameController = (function () {
                 };                
             };
         };
-        currentPlayer = players[1];
-        return console.log(drawMessage);
-    }
+        
+        //check if player has won
+        if (gameController.winFlag != 1){
+            return console.log(drawMessage);
+        };
+    };
 
-    return {playTurn, winFlag, currentPlayer};
+    return {playTurn, winFlag, setCurrentPlayer, currentPlayer};
 
 })();
 
@@ -120,6 +133,7 @@ const displayController = (function () {
     const cellSeven = document.querySelector(".seven");
     const cellEight = document.querySelector(".eight");
     const cellNine = document.querySelector(".nine");
+    const resetButton = document.querySelector(".reset");
 
     cellOne.addEventListener("click", ()=> gameController.playTurn(0, 0));
     cellTwo.addEventListener("click", ()=> gameController.playTurn(0, 1));
@@ -130,6 +144,7 @@ const displayController = (function () {
     cellSeven.addEventListener("click", ()=> gameController.playTurn(2, 0));
     cellEight.addEventListener("click", ()=> gameController.playTurn(2, 1));
     cellNine.addEventListener("click", ()=> gameController.playTurn(2, 2));
+    resetButton.addEventListener("click", gameBoard.reset);
 
     cellOne.addEventListener("click", ()=> cellOne.textContent = gameController.currentPlayer.marker);
     cellTwo.addEventListener("click", ()=> cellTwo.textContent = gameController.currentPlayer.marker);
