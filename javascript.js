@@ -21,6 +21,9 @@ const gameBoard = (function () {
                 board[i][j] = 0;
             };
         };
+        for (let i = 0; i < displayController.allCells.length; i++){
+            displayController.allCells[i].textContent = "";
+        };
         gameController.setCurrentPlayer(0);
         gameController.winFlag = 0;
     };
@@ -64,7 +67,6 @@ const gameController = (function () {
         if(checkOccupied(a, b) === 1 && gameController.winFlag === 0){
         gameBoard.update(a, b, currentPlayer.marker);
         console.log(JSON.stringify(gameBoard.currentBoard()));
-        // displayController.cellOne.textContent = currentPlayer.marker;
         checkWin();
         checkDraw();
         switchPlayer();
@@ -93,8 +95,6 @@ const gameController = (function () {
                 gameBoard.board[0][2] === gameBoard.board[1][1] && gameBoard.board[0][2] === gameBoard.board[2][0] && gameBoard.board[0][2] != 0){
                 console.log(winMessage);
                 gameController.winFlag = 1;
-                //switchPlayer runs after winCheck - reset active player for next game
-                // currentPlayer = players[1];
                 return
             };
         };
@@ -133,6 +133,7 @@ const displayController = (function () {
     const cellSeven = document.querySelector(".seven");
     const cellEight = document.querySelector(".eight");
     const cellNine = document.querySelector(".nine");
+    const allCells = document.querySelectorAll(".cell")
     const resetButton = document.querySelector(".reset");
 
     cellOne.addEventListener("click", ()=> gameController.playTurn(0, 0));
@@ -155,4 +156,6 @@ const displayController = (function () {
     cellSeven.addEventListener("click", ()=> cellSeven.textContent = gameController.currentPlayer.marker);
     cellEight.addEventListener("click", ()=> cellEight.textContent = gameController.currentPlayer.marker);
     cellNine.addEventListener("click", ()=> cellNine.textContent = gameController.currentPlayer.marker);
+
+    return {allCells}
 })();
