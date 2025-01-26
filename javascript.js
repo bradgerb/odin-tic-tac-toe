@@ -64,7 +64,9 @@ const gameController = (function () {
     };
 
     const getCurrentPlayerMarker = ()=>{
-        return currentPlayer.marker
+        if(gameController.winFlag === 0){
+            return currentPlayer.marker
+        };
     };
 
     const playTurn = (a, b)=>{
