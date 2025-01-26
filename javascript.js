@@ -67,7 +67,11 @@ const gameController = (function () {
         if(checkOccupied(a, b) === 1 && gameController.winFlag === 0){
             return currentPlayer.marker
         }else {
-            return gameBoard.board[a][b];
+            if (gameBoard.board[a][b] === 0){
+                return
+            }else{
+                return gameBoard.board[a][b];
+            };
         };
     };
 
@@ -181,6 +185,6 @@ const displayController = (function () {
         gameController.playTurn(2, 2);
     });
     resetButton.addEventListener("click", gameBoard.reset);
-    
+
     return {allCells}
 })();
