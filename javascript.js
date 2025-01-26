@@ -63,9 +63,11 @@ const gameController = (function () {
         };
     };
 
-    const getCurrentPlayerMarker = ()=>{
-        if(gameController.winFlag === 0){
+    const getCurrentPlayerMarker = (a, b)=>{
+        if(checkOccupied(a, b) === 1 && gameController.winFlag === 0){
             return currentPlayer.marker
+        }else {
+            return gameBoard.board[a][b];
         };
     };
 
@@ -142,26 +144,43 @@ const displayController = (function () {
     const allCells = document.querySelectorAll(".cell")
     const resetButton = document.querySelector(".reset");
 
-    cellOne.addEventListener("click", ()=> cellOne.textContent = gameController.getCurrentPlayerMarker());
-    cellTwo.addEventListener("click", ()=> cellTwo.textContent = gameController.getCurrentPlayerMarker());
-    cellThree.addEventListener("click", ()=> cellThree.textContent = gameController.getCurrentPlayerMarker());
-    cellFour.addEventListener("click", ()=> cellFour.textContent = gameController.getCurrentPlayerMarker());
-    cellFive.addEventListener("click", ()=> cellFive.textContent = gameController.getCurrentPlayerMarker());
-    cellSix.addEventListener("click", ()=> cellSix.textContent = gameController.getCurrentPlayerMarker());
-    cellSeven.addEventListener("click", ()=> cellSeven.textContent = gameController.getCurrentPlayerMarker());
-    cellEight.addEventListener("click", ()=> cellEight.textContent = gameController.getCurrentPlayerMarker());
-    cellNine.addEventListener("click", ()=> cellNine.textContent = gameController.getCurrentPlayerMarker());
-
-    cellOne.addEventListener("click", ()=> gameController.playTurn(0, 0));
-    cellTwo.addEventListener("click", ()=> gameController.playTurn(0, 1));
-    cellThree.addEventListener("click", ()=> gameController.playTurn(0, 2));
-    cellFour.addEventListener("click", ()=> gameController.playTurn(1, 0));
-    cellFive.addEventListener("click", ()=> gameController.playTurn(1, 1));
-    cellSix.addEventListener("click", ()=> gameController.playTurn(1, 2));
-    cellSeven.addEventListener("click", ()=> gameController.playTurn(2, 0));
-    cellEight.addEventListener("click", ()=> gameController.playTurn(2, 1));
-    cellNine.addEventListener("click", ()=> gameController.playTurn(2, 2));
+    cellOne.addEventListener("click", ()=> {
+        cellOne.textContent = gameController.getCurrentPlayerMarker(0, 0);
+        gameController.playTurn(0, 0);
+    });
+    cellTwo.addEventListener("click", ()=> {
+        cellTwo.textContent = gameController.getCurrentPlayerMarker(0, 1);
+        gameController.playTurn(0, 1);
+    });
+    cellThree.addEventListener("click", ()=> {
+        cellThree.textContent = gameController.getCurrentPlayerMarker(0, 2);
+        gameController.playTurn(0, 2);
+    });
+    cellFour.addEventListener("click", ()=> {
+        cellFour.textContent = gameController.getCurrentPlayerMarker(1, 0);
+        gameController.playTurn(1, 0);
+    });
+    cellFive.addEventListener("click", ()=> {
+        cellFive.textContent = gameController.getCurrentPlayerMarker(1, 1);
+        gameController.playTurn(1, 1);
+    });
+    cellSix.addEventListener("click", ()=> {
+        cellSix.textContent = gameController.getCurrentPlayerMarker(1, 2);
+        gameController.playTurn(1, 2);
+    });
+    cellSeven.addEventListener("click", ()=> {
+        cellSeven.textContent = gameController.getCurrentPlayerMarker(2, 0);
+        gameController.playTurn(2, 0);
+    });
+    cellEight.addEventListener("click", ()=> {
+        cellEight.textContent = gameController.getCurrentPlayerMarker(2, 1);
+        gameController.playTurn(2, 1);
+    });
+    cellNine.addEventListener("click", ()=> {
+        cellNine.textContent = gameController.getCurrentPlayerMarker(2, 2);
+        gameController.playTurn(2, 2);
+    });
     resetButton.addEventListener("click", gameBoard.reset);
-
+    
     return {allCells}
 })();
