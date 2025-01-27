@@ -10,11 +10,11 @@ const gameBoard = (function () {
         };
     };
 
-    function update(row, column, player){
-        board[row][column] = player
+    const update = (row, column, player)=>{
+        board[row][column] = player;
     };
 
-    function reset(){
+    const reset = ()=>{
         for (let i = 0; i < rows; i++){
             board[i] = [];
             for (let j = 0; j < columns; j++){
@@ -26,9 +26,7 @@ const gameBoard = (function () {
         gameController.winFlagReset();
     };
 
-    function currentBoard(){
-        return board;
-    };
+    const currentBoard = ()=> board;
 
     const boardLocation = (a, b)=> board[a][b];
     
@@ -163,7 +161,9 @@ const displayController = (function () {
             allCells[i].textContent = gameController.getCurrentPlayerMarker(calcRow(i), calcColumn(i));
             gameController.playTurn(calcRow(i), calcColumn(i));
         });
-    }
+    };
 
     return {resetCells}
 })();
+
+gameController.winFlagReset();
