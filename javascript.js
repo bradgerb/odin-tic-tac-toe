@@ -36,14 +36,27 @@ const gameBoard = (function () {
 })();
 
 const gameController = (function () {
-    
+
+    let playerOneName = "Bob";
+    let playerTwoName = "Not Bob"
+
+    const submitPlayerNames = ()=>{
+        nameList = document.getElementById("playerNames");
+        const FormData = new FormData(playerNames);
+        playerOneName = FormData.get("playerOne");
+        playerTwoName = FormData.get("playerTwo");
+    };
+
+    const submitButton = document.querySelector(".submit");
+    submitButton.addEventListener("click", submitPlayerNames);
+
     const players = [
         {
-            name: "Bob",
+            name: `${playerOneName}`,
             marker: "X"
         },
         {
-            name: "Not Bob",
+            name: `${playerTwoName}`,
             marker: "O"
         }
     ];
