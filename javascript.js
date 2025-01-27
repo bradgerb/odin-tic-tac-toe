@@ -24,6 +24,7 @@ const gameBoard = (function () {
         displayController.resetCells();
         gameController.setCurrentPlayer(0);
         gameController.winFlagReset();
+        displayController.winOverlayReset();
     };
 
     const currentBoard = ()=> board;
@@ -108,6 +109,7 @@ const gameController = (function () {
                 gameBoard.boardLocation(0, 0) === gameBoard.boardLocation(1, 1) && gameBoard.boardLocation(0, 0) === gameBoard.boardLocation(2, 2) && gameBoard.boardLocation(0, 0) != 0 ||
                 gameBoard.boardLocation(0, 2) === gameBoard.boardLocation(1, 1) && gameBoard.boardLocation(0, 2) === gameBoard.boardLocation(2, 0) && gameBoard.boardLocation(0, 2) != 0){
                 console.log(winMessage);
+                displayController.winOverlay(currentPlayer.name);
                 winFlag = 1;
                 return
             };
@@ -129,6 +131,7 @@ const gameController = (function () {
         
         //check if player has won
         if (winFlag === 0){
+            displayController.drawOverlay();
             return console.log(drawMessage);
         };
     };
@@ -141,6 +144,7 @@ const displayController = (function () {
 
     const allCells = document.querySelectorAll(".cell")
     const resetButton = document.querySelector(".reset");
+    const winBox = document.querySelector(".winMessage");
    
     resetButton.addEventListener("click", gameBoard.reset);
 
@@ -160,5 +164,17 @@ const displayController = (function () {
         });
     };
 
-    return {resetCells}
+    const winOverlay = (winner)=>{
+        winBox.textContent = `${winner} Wins!`;
+    };
+
+    const drawOverlay = ()=>{
+        winBox.textContent = "The game is a draw.";
+    };
+
+    const winOverlayReset = ()=>{
+        winBox.textContent = "";
+    };
+
+    return {resetCells, winOverlay, drawOverlay, winOverlayReset}
 })();
