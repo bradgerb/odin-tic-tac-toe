@@ -92,7 +92,7 @@ const gameController = (function () {
     };
     
     const winFlagReset = ()=>{
-        gameController.winFlag = 0;
+        winFlag = 0;
     };
 
     const checkWin = ()=>{
@@ -108,7 +108,7 @@ const gameController = (function () {
                 gameBoard.boardLocation(0, 0) === gameBoard.boardLocation(1, 1) && gameBoard.boardLocation(0, 0) === gameBoard.boardLocation(2, 2) && gameBoard.boardLocation(0, 0) != 0 ||
                 gameBoard.boardLocation(0, 2) === gameBoard.boardLocation(1, 1) && gameBoard.boardLocation(0, 2) === gameBoard.boardLocation(2, 0) && gameBoard.boardLocation(0, 2) != 0){
                 console.log(winMessage);
-                gameController.winFlag = 1;
+                winFlag = 1;
                 return
             };
         };
