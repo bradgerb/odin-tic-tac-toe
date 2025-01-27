@@ -137,54 +137,10 @@ const gameController = (function () {
 })();
 
 const displayController = (function () {
-    const cellOne = document.querySelector(".one");
-    const cellTwo = document.querySelector(".two");
-    const cellThree = document.querySelector(".three");
-    const cellFour = document.querySelector(".four");
-    const cellFive = document.querySelector(".five");
-    const cellSix = document.querySelector(".six");
-    const cellSeven = document.querySelector(".seven");
-    const cellEight = document.querySelector(".eight");
-    const cellNine = document.querySelector(".nine");
+
     const allCells = document.querySelectorAll(".cell")
     const resetButton = document.querySelector(".reset");
-
-    // cellOne.addEventListener("click", ()=> {
-    //     cellOne.textContent = gameController.getCurrentPlayerMarker(0, 0);
-    //     gameController.playTurn(0, 0);
-    // });
-    // cellTwo.addEventListener("click", ()=> {
-    //     cellTwo.textContent = gameController.getCurrentPlayerMarker(0, 1);
-    //     gameController.playTurn(0, 1);
-    // });
-    // cellThree.addEventListener("click", ()=> {
-    //     cellThree.textContent = gameController.getCurrentPlayerMarker(0, 2);
-    //     gameController.playTurn(0, 2);
-    // });
-    // cellFour.addEventListener("click", ()=> {
-    //     cellFour.textContent = gameController.getCurrentPlayerMarker(1, 0);
-    //     gameController.playTurn(1, 0);
-    // });
-    // cellFive.addEventListener("click", ()=> {
-    //     cellFive.textContent = gameController.getCurrentPlayerMarker(1, 1);
-    //     gameController.playTurn(1, 1);
-    // });
-    // cellSix.addEventListener("click", ()=> {
-    //     cellSix.textContent = gameController.getCurrentPlayerMarker(1, 2);
-    //     gameController.playTurn(1, 2);
-    // });
-    // cellSeven.addEventListener("click", ()=> {
-    //     cellSeven.textContent = gameController.getCurrentPlayerMarker(2, 0);
-    //     gameController.playTurn(2, 0);
-    // });
-    // cellEight.addEventListener("click", ()=> {
-    //     cellEight.textContent = gameController.getCurrentPlayerMarker(2, 1);
-    //     gameController.playTurn(2, 1);
-    // });
-    // cellNine.addEventListener("click", ()=> {
-    //     cellNine.textContent = gameController.getCurrentPlayerMarker(2, 2);
-    //     gameController.playTurn(2, 2);
-    // });
+   
     resetButton.addEventListener("click", gameBoard.reset);
 
     const resetCells = ()=>{
