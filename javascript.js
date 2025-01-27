@@ -23,17 +23,19 @@ const gameBoard = (function () {
         };
         displayController.resetCells();
         gameController.setCurrentPlayer(0);
-        gameController.winFlag = 0;
+        gameController.winFlagReset();
     };
 
     function currentBoard(){
         return board;
     };
 
+    const boardLocation = (a, b)=> board[a][b];
+    
     const getRows = ()=>rows
     const getColumns = ()=>columns
 
-    return {update, reset, currentBoard, board, getRows, getColumns};
+    return {update, reset, currentBoard, boardLocation, getRows, getColumns};
 })();
 
 const gameController = (function () {
@@ -68,10 +70,10 @@ const gameController = (function () {
         if(checkOccupied(a, b) === 1 && gameController.winFlag === 0){
             return currentPlayer.marker
         }else {
-            if (gameBoard.board[a][b] === 0){
+            if (gameBoard.boardLocation(a, b) === 0){
                 return
             }else{
-                return gameBoard.board[a][b];
+                return gameBoard.boardLocation(a, b);
             };
         };
     };
@@ -87,12 +89,16 @@ const gameController = (function () {
     };
 
     const checkOccupied = (a, b)=> {
-        if(gameBoard.board[a][b] === 0){
+        if(gameBoard.boardLocation(a, b) === 0){
             return 1
         };
     };
     
     let winFlag = 0;
+
+    const winFlagReset = ()=>{
+        gameController.winFlag = 0;
+    };
 
     const checkWin = ()=>{
 
@@ -100,12 +106,12 @@ const gameController = (function () {
 
         for (let i = 0; i < 3; i++){
             if (//check horizontal
-                gameBoard.board[i][0] === gameBoard.board[i][1] && gameBoard.board[i][0] === gameBoard.board[i][2] && gameBoard.board[i][0] != 0 ||
+                gameBoard.boardLocation(i, 0) === gameBoard.boardLocation(i, 1) && gameBoard.boardLocation(i, 0) === gameBoard.boardLocation(i, 2) && gameBoard.boardLocation(i, 0) != 0 ||
                 //check vertical
-                gameBoard.board[0][i] === gameBoard.board[1][i] && gameBoard.board[0][i] === gameBoard.board[2][i] && gameBoard.board[0][i] != 0 ||
+                gameBoard.boardLocation(0, i) === gameBoard.boardLocation(1, i) && gameBoard.boardLocation(0, i) === gameBoard.boardLocation(2, i) && gameBoard.boardLocation(0, i) != 0 ||
                 // check diagonal
-                gameBoard.board[0][0] === gameBoard.board[1][1] && gameBoard.board[0][0] === gameBoard.board[2][2] && gameBoard.board[0][0] != 0 ||
-                gameBoard.board[0][2] === gameBoard.board[1][1] && gameBoard.board[0][2] === gameBoard.board[2][0] && gameBoard.board[0][2] != 0){
+                gameBoard.boardLocation(0, 0) === gameBoard.boardLocation(1, 1) && gameBoard.boardLocation(0, 0) === gameBoard.boardLocation(2, 2) && gameBoard.boardLocation(0, 0) != 0 ||
+                gameBoard.boardLocation(0, 2) === gameBoard.boardLocation(1, 1) && gameBoard.boardLocation(0, 2) === gameBoard.boardLocation(2, 0) && gameBoard.boardLocation(0, 2) != 0){
                 console.log(winMessage);
                 gameController.winFlag = 1;
                 return
@@ -118,9 +124,9 @@ const gameController = (function () {
         let drawMessage = "The game is a draw";
 
         //check if board is full
-        for (let i = 0; i < 3; i++){
-            for (let j = 0; j < 3; j++){
-                if (gameBoard.board[i][j] === 0){
+        for (let i = 0; i < gameBoard.getRows(); i++){
+            for (let j = 0; j < gameBoard.getColumns(); j++){
+                if (gameBoard.boardLocation(i, j) === 0){
                     return
                 };                
             };
@@ -132,7 +138,7 @@ const gameController = (function () {
         };
     };
 
-    return {playTurn, winFlag, setCurrentPlayer, getCurrentPlayerMarker, currentPlayer};
+    return {playTurn, winFlagReset, setCurrentPlayer, getCurrentPlayerMarker};
 
 })();
 
