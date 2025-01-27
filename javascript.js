@@ -27,9 +27,7 @@ const gameBoard = (function () {
     };
 
     const currentBoard = ()=> board;
-
     const boardLocation = (a, b)=> board[a][b];
-    
     const getRows = ()=>rows
     const getColumns = ()=>columns
 
@@ -50,6 +48,7 @@ const gameController = (function () {
     ];
 
     let currentPlayer = players[0];
+    let winFlag = 0;
 
     const setCurrentPlayer = (n)=> {
         let currentPlayerNumber = n;
@@ -65,7 +64,7 @@ const gameController = (function () {
     };
 
     const getCurrentPlayerMarker = (a, b)=>{
-        if(checkOccupied(a, b) === 1 && gameController.winFlag === 0){
+        if(checkOccupied(a, b) === 1 && winFlag === 0){
             return currentPlayer.marker
         }else {
             if (gameBoard.boardLocation(a, b) === 0){
@@ -77,7 +76,7 @@ const gameController = (function () {
     };
 
     const playTurn = (a, b)=>{
-        if(checkOccupied(a, b) === 1 && gameController.winFlag === 0){
+        if(checkOccupied(a, b) === 1 && winFlag === 0){
         gameBoard.update(a, b, currentPlayer.marker);
         console.log(JSON.stringify(gameBoard.currentBoard()));
         checkWin();
@@ -92,8 +91,6 @@ const gameController = (function () {
         };
     };
     
-    let winFlag = 0;
-
     const winFlagReset = ()=>{
         gameController.winFlag = 0;
     };
@@ -131,7 +128,7 @@ const gameController = (function () {
         };
         
         //check if player has won
-        if (gameController.winFlag != 1){
+        if (winFlag === 0){
             return console.log(drawMessage);
         };
     };
@@ -165,5 +162,3 @@ const displayController = (function () {
 
     return {resetCells}
 })();
-
-gameController.winFlagReset();
