@@ -36,8 +36,12 @@ body{
     font-size: 170px;
 }
 
-.reset{
-    padding: 5px 10px;
+.form{
     margin-top: 50px;
+}
+
+.button{
+    padding: 5px 10px;
+    margin: 20px 5px;
     border-radius: 15px;
 }
