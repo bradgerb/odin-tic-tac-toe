@@ -37,31 +37,44 @@ const gameBoard = (function () {
 
 const gameController = (function () {
 
-    let playerOneName = "Bob";
-    let playerTwoName = "Not Bob"
+    let playerOneName = "";
+    let playerTwoName = "";
 
-        const nameList = document.getElementById("playerNames");
-        nameList.addEventListener("submit", function (e) {
-            e.preventDefault();
-        
-            const formData = new FormData(nameList);            
+    const getPlayerOneName = (name)=>{
+        if(name === ""){
+            players[0].name = "Bob";
+        }else{
+            players[0].name = name;
+        };
+    };
 
-            playerOneName = formData.get("playerOne");
-            playerTwoName = formData.get("playerTwo");
+    const getPlayerTwoName = (name)=>{
+        if(playerTwoName === ""){
+            players[1].name = "Not Bob";
+        }else{
+            players[1].name = name;
+        };
+    };
 
-            console.log(playerOneName);
-            
-            return {playerOneName, playerTwoName}
-        });
+    const nameList = document.getElementById("playerNames");
 
+    nameList.addEventListener("submit", function (e) {
+        e.preventDefault();
+    
+        const formData = new FormData(nameList);            
+
+        getPlayerOneName(formData.get("playerOne"));
+        getPlayerTwoName(formData.get("playerTwo"));
+
+    });
 
     const players = [
         {
-            name: `${playerOneName}`,
+            name: "Bob",
             marker: "X"
         },
         {
-            name: `${playerTwoName}`,
+            name: "Not Bob",
             marker: "O"
         }
     ];
@@ -127,6 +140,7 @@ const gameController = (function () {
                 gameBoard.boardLocation(0, 0) === gameBoard.boardLocation(1, 1) && gameBoard.boardLocation(0, 0) === gameBoard.boardLocation(2, 2) && gameBoard.boardLocation(0, 0) != 0 ||
                 gameBoard.boardLocation(0, 2) === gameBoard.boardLocation(1, 1) && gameBoard.boardLocation(0, 2) === gameBoard.boardLocation(2, 0) && gameBoard.boardLocation(0, 2) != 0){
                 console.log(winMessage);
+            console.log(playerOneName);    
                 displayController.winOverlay(currentPlayer.name);
                 winFlag = 1;
                 return
