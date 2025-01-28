@@ -49,7 +49,7 @@ const gameController = (function () {
     };
 
     const getPlayerTwoName = (name)=>{
-        if(playerTwoName === ""){
+        if(name === ""){
             players[1].name = "Not Bob";
         }else{
             players[1].name = name;
