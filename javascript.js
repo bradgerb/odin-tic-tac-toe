@@ -40,15 +40,20 @@ const gameController = (function () {
     let playerOneName = "Bob";
     let playerTwoName = "Not Bob"
 
-    const submitPlayerNames = ()=>{
-        nameList = document.getElementById("playerNames");
-        const FormData = new FormData(playerNames);
-        playerOneName = FormData.get("playerOne");
-        playerTwoName = FormData.get("playerTwo");
-    };
+        const nameList = document.getElementById("playerNames");
+        nameList.addEventListener("submit", function (e) {
+            e.preventDefault();
+        
+            const formData = new FormData(nameList);            
 
-    const submitButton = document.querySelector(".submit");
-    submitButton.addEventListener("click", submitPlayerNames);
+            playerOneName = formData.get("playerOne");
+            playerTwoName = formData.get("playerTwo");
+
+            console.log(playerOneName);
+            
+            return {playerOneName, playerTwoName}
+        });
+
 
     const players = [
         {
